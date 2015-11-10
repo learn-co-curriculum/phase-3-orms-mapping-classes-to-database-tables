@@ -161,7 +161,7 @@ class Song
   end
   
   def self.create_table
-    sql =  <<- SQL 
+    sql =  <<-SQL 
       CREATE TABLE IF NOT EXISTS songs (
         id PRIMARY KEY INTEGER, 
         name TEXT, 
@@ -172,9 +172,9 @@ class Song
   end
   
   def self.save(song_instance)
-    sql = <<- SQL
+    sql = <<-SQL
       INSERT INTO songs (name, album) 
-      VALUES #{song_instance.name}, #{song_instance.album}
+      VALUES song_instance.name, song_instance.album
     SQL
     
     DB[:conn].execute(sql)
