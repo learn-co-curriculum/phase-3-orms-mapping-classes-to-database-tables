@@ -10,6 +10,8 @@
 
 When building an ORM to connect our Ruby program to a database, we equate a class with a database table and the instances that the class produces to rows in that table. 
 
+Why map classes to tables? Our end goal is to persist information regarding songs to a database. In order to persist that data efficiently and in an organized manner, we need to first map or equate our Ruby class to a database table. 
+
 Let's say we are building a music player app that allows users to store their music and browse their songs by song.
 
 This program will have a `Song` class. Each song instance will have a name and an album attribute. 
@@ -27,7 +29,7 @@ class Song
 end
 ```
 
-Here we have an `attr_accessor` for `name` and `album`. In order to "map" this `Song` class to a songs database table, we need to create our database, then we need to create our songs table. 
+Here we have an `attr_accessor` for `name` and `album`. In order to "map" this `Song` class to a songs database table, we need to create our database, then we need to create our songs table. In building an ORM, it is conventional to pluralize the name of the class to create the name of the table. Therefore, the `Song` class equals the "songs" table.
 
 ### Creating the Database
 
@@ -93,7 +95,7 @@ Let's break down this code.
 
 Notice that we are initializing an individual `Song` instance with an `id` attribute that has a default value of `nil`. Why are we doing this? First of all, songs need an `id` attribute only because they will saved into the database and we know that each table row needs an `id` value which is the primary key. 
 
-When we create a new song with the `Song.new` method, we *do not set that song's id*. A song gets an `id` only when it gets saved into the database (more on inserting songs into the database later). We therefore set the default value of the `id` argument that the `#initialize` method takes equal to `nil`, so that we can create new song instances that *do not have an `id` value. We'll leave that up to the database to handle later on. 
+When we create a new song with the `Song.new` method, we *do not set that song's id*. A song gets an `id` only when it gets saved into the database (more on inserting songs into the database later). We therefore set the default value of the `id` argument that the `#initialize` method takes equal to `nil`, so that we can create new song instances that *do not have an `id` value. We'll leave that up to the database to handle later on. Why leave it up to the database? Remember that in the world of relational database, the `id` of a given record must be unique. If we could replicate a record's `id`, we would have a very disorganized database. Only the database itself, through the magic of SQL, can ensure that the `id` of each record is unique. 
 
 Similarly, we do not have an `attr_accessor` for `id`, because we never want to set or change a song's `id` manually. The database alone is responsible for setting a song's `id`. We'll learn how later on. 
 
@@ -109,13 +111,53 @@ You don't have to use a heredoc, it's just a helpful too for crafting long strin
 
 Now that our songs table exists, we can learn how to save data regarding individual songs into that table. 
 
-## Mapping Class Instances to Table Rows: Writing a `#save` method to `INSERT` data into the table
+## Mapping Class Instances to Table Rows
 
 When we say that we are saving data to our database, what data are we referring to? If individual instances of a class are "mapped" to rows in  a table, does that mean that the instances themselves, these individual Ruby objects, are saved into the database?
 
 Actually, **we are not saving Ruby objects in our database.** We are going to take the individual attributes of a given instance, in this case a song's name and album, and save *those attributes that describe an individual song* to the database, as one, single row.
 
-Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
+For example, let's say we have a song:
+
+```ruby
+gold_digger = Song.new("Gold Digger", "Late Registration")
+
+gold_digger.name
+# => "Gold Digger"
+
+gold_digger.album
+# => "Late Registration" 
+```
+
+This song has it's two attributes, `name` and `album`, set equal to the above values. In order to save the song `gold_digger` into the songs table, we will use the name and album of the song to create a new row in that table. The SQL statement we want to execute would look something like this:
+
+```ruby
+INSERT INTO songs (name, album) VALUES ("Gold Digger", "Late Registration")
+```
+
+What if we had another song that we wanted to save?
+
+```ruby
+hello = Song.new("Hello", "25")
+
+hello.name 
+# => "Hello"
+
+hello.album
+# => "25"
+```
+
+In order to save `hello` into our database, we do not insert the Ruby object stored in the `hello` variable. Instead, we use `hello`'s name and album values to create a new row in the songs table:
+
+```ruby
+INSERT INTO songs (name, album) VALUES ("Hello", "25")
+```
+
+We can see that the operation of saving the attributes of a particular song into a database table is common enough. Every time we want to save a record, though, we are repeating the same exact steps and using the same code. The only thing that is different are the values that we are inserting into our songs table. Let's abstract this functionality into an instance method, `#save`. 
+
+### Inserting Data into a table with the `#save` Method
+
+Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database. 
 
 ```ruby
 class Song
@@ -134,7 +176,7 @@ end
 
 Let's break down the code in this method. 
 
-### The `#save` Method
+#### The `#save` Method
 
 In order to `INSERT` data into our songs table, we need to craft a SQL `INSERT` statement. Ideally, it would look something like this:
 
@@ -149,7 +191,7 @@ We use something called **bound parameters**.
 
 #### Bound Parameters
 
-Bound parameters protect our program from getting confused by SQL injections and special characters. Instead of interpolating variables into a string of SQL, we are using the `?` characters as placeholders. Then, the special magic provided to us by the SQLite3-Ruby gem's `#execute` method will take the values we pass in as an argument and apply them as the values of the question marks. 
+Bound parameters protect our program from getting confused by [SQL injections](https://en.wikipedia.org/wiki/SQL_injection) and special characters. Instead of interpolating variables into a string of SQL, we are using the `?` characters as placeholders. Then, the special magic provided to us by the SQLite3-Ruby gem's `#execute` method will take the values we pass in as an argument and apply them as the values of the question marks. 
 
 #### How it works
 
