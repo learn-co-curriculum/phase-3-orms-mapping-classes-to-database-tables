@@ -103,7 +103,7 @@ Above, we created a class method, `#create_table`, that crafts a SQL statement t
 
 **Top-Tip:** For strings that will take up multiple lines in your text editor, use a [heredoc](https://en.wikipedia.org/wiki/Here_document) to create a string that runs on to multiple lines. To create a heredoc, we use:
 
-`<<-` + `name of language the content of the string relates to` + `the string, on multiple lines` + `name of language`. 
+`<<-` + `name of language contained in our multiline statement` + `the string, on multiple lines` + `name of language`. 
 
 You don't have to use a heredoc, it's just a helpful too for crafting long strings in Ruby. Back to our regularly scheduled programming...
 
@@ -115,26 +115,47 @@ When we say that we are saving data to our database, what data are we referring 
 
 Actually, **we are not saving Ruby objects in our database.** We are going to take the individual attributes of a given instance, in this case a song's name and album, and save *those attributes that describe an individual song* to the database, as one, single row.
 
-Let's built a class method, `#save`, that takes in an argument of a given song instance and saves the data that constitutes that instance into the songs table of our database:
+Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
 
 ```ruby
 class Song
 
-  def self.save(song_instance)
+  def save
     sql = <<- SQL
       INSERT INTO songs (name, album) 
-      VALUES #{song_instance.name}, #{song_instance.album}
+      VALUES (?, ?)
     SQL
     
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql, #{self.name}, #{self.album})
     
   end
 end
 ``` 
 
-Here we save a record into our database that has the name and album values of the song instance we are trying to save. We are not saving the Ruby object itself. We are creating a new row in our songs table that has the values that characterize that song instance. 
+Let's break down the code in this method. 
 
-**Important:** Notice that we *didn't* insert an ID number into the table, nor does a `Song` instance have an `id` attribute. That is because the 
+### The `#save` Method
+
+In order to `INSERT` data into our songs table, we need to craft a SQL `INSERT` statement. Ideally, it would look something like this:
+
+```sql
+INSERT INTO songs (name, album)
+VALUES <the given song's name>, <the given song's album>
+```
+
+Above, we used the heredoc to craft our multi-line SQL statement. How are we going to pass in, or interpolate, the name and album of a given song into our heredoc? 
+
+We use something called **bound parameters**. 
+
+#### Bound Parameters
+
+Bound parameters protect our program from getting confused by SQL injections and special characters. Instead of interpolating variables into a string of SQL, we are using the `?` characters as placeholders. Then, the special magic provided to us by the SQLite3-Ruby gem's `#execute` method will take the values we pass in as an argument and apply them as the values of the question marks. 
+
+#### How it works
+
+So, our `#save` method inserts a record into our database that has the name and album values of the song instance we are trying to save. We are not saving the Ruby object itself. We are creating a new row in our songs table that has the values that characterize that song instance. 
+
+**Important:** Notice that we *didn't* insert an ID number into the table with the above statement. Remember that the `INTEGER PRIMARY KEY` datatype will assign and auto-increment the id attribute of each record that gets saved.
 
 ## Creating Instances vs. Creating Table Rows
 
@@ -171,13 +192,13 @@ class Song
     DB[:conn].execute(sql) 
   end
   
-  def self.save(song_instance)
+  def save
     sql = <<-SQL
       INSERT INTO songs (name, album) 
-      VALUES song_instance.name, song_instance.album
+      VALUES (?, ?)
     SQL
     
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql, #{self.name}, #{self.album})
     
   end
   
@@ -196,7 +217,7 @@ Song.new("Hello", "25")
 Song.new("99 Problems", "The Black Album")
 
 Song.all.each do |song|
-  Song.save(song)
+  song.save
 end
 ```
 
@@ -204,7 +225,7 @@ Here we:
 
 * Create the songs table. 
 * Create two new song instances. 
-* Iterate over our collection of song instances stored in `Song.all` and use the `Song.save` method, passing in an argument of each song instances, to persist them to the database. 
+* Iterate over our collection of song instances stored in `Song.all` and use the `song.save` method to persist them to the database. 
 
 ## Conclusion
 
