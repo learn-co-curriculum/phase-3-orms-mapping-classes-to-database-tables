@@ -115,7 +115,7 @@ When we say that we are saving data to our database, what data are we referring 
 
 Actually, **we are not saving Ruby objects in our database.** We are going to take the individual attributes of a given instance, in this case a song's name and album, and save *those attributes that describe an individual song* to the database, as one, single row.
 
-Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
+Let's build an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
 
 ```ruby
 class Song
