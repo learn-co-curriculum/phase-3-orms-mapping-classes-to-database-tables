@@ -65,9 +65,7 @@ Here's an example of a `Song` class that maps instance attributes to table colum
 ```ruby
 class Song
 
-  attr_accessor :name, :album
-  
-  attr_reader :id
+  attr_accessor :name, :album, :id
   
   def initialize(name, album, id=nil)
     @id = id
@@ -96,8 +94,6 @@ Let's break down this code.
 Notice that we are initializing an individual `Song` instance with an `id` attribute that has a default value of `nil`. Why are we doing this? First of all, songs need an `id` attribute only because they will saved into the database and we know that each table row needs an `id` value which is the primary key. 
 
 When we create a new song with the `Song.new` method, we *do not set that song's id*. A song gets an `id` only when it gets saved into the database (more on inserting songs into the database later). We therefore set the default value of the `id` argument that the `#initialize` method takes equal to `nil`, so that we can create new song instances that *do not have an `id` value. We'll leave that up to the database to handle later on. Why leave it up to the database? Remember that in the world of relational database, the `id` of a given record must be unique. If we could replicate a record's `id`, we would have a very disorganized database. Only the database itself, through the magic of SQL, can ensure that the `id` of each record is unique. 
-
-Similarly, we do not have an `attr_accessor` for `id`, because we never want to set or change a song's `id` manually. The database alone is responsible for setting a song's `id`. We'll learn how later on. 
 
 #### The `#create_table` Method
 
@@ -157,7 +153,7 @@ We can see that the operation of saving the attributes of a particular song into
 
 ### Inserting Data into a table with the `#save` Method
 
-Let's build an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
+Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database. 
 
 ```ruby
 class Song
@@ -203,24 +199,19 @@ So, our `#save` method inserts a record into our database that has the name and 
 
 The moment in which we create a new `Song` instance with the `#new` method is *different than the moment in which we save a representation of that song to our database*. The `#new` method creates a new instance of the song class, a new Ruby object. The `#save` method takes the attributes that characterize a given song and save it to the songs table in our database as its own table row. 
 
-We can make our own decisions about when and where to call the `#save` method. You could choose to call that method *inside the initialize method*, to automatically save a song's information to the database as soon as that new song instance is created. Or, we could collect all of our song instances in an class variable, `@@all`, and save the members of that collection at a later time. 
+At what point in time should we actually save a new record? While it is possible to save the record right at the moment the new object is created, i.e. in the `#initialize` method, this is not a great idea. We don't want to force our objects to be saved every time they are created, or make the creation of an object dependent upon/always coupled with saving a record to the database. As our program grows and changes, we may find the need to create objects and not save them. A dependency between instantiating an object and saving that record to the database would preclude this or, at the very least, make it harder to implement. 
 
-Let's take a look at that option now:
+So, we'll keep our `#initialize` and `#save` methods separate:
 
 ```ruby
 class Song
-  
-  @@all = []
-
-  attr_accessor :name, :album
-  
-  attr_reader :id
+ 
+  attr_accessor :name, :album, :id
   
   def initialize(name, album, id=nil)
     @id = id
     @name = name
     @album = album
-    @@all << self
   end
   
   def self.create_table
@@ -243,10 +234,6 @@ class Song
     DB[:conn].execute(sql, self.name, self.album)
     
   end
-  
-  def self.all
-    @@all
-  end
 
 end
 ```
@@ -255,21 +242,39 @@ Now, we can create and save songs like this:
 
 ```ruby
 Song.create_table
-Song.new("Hello", "25")
-Song.new("99 Problems", "The Black Album")
+hello = Song.new("Hello", "25")
+ninety_nine_problems = Song.new("99 Problems", "The Black Album")
 
-Song.all.each do |song|
-  song.save
-end
+hello.save
+ninety_nine_problems.save
 ```
 
 Here we:
 
 * Create the songs table. 
 * Create two new song instances. 
-* Iterate over our collection of song instances stored in `Song.all` and use the `song.save` method to persist them to the database. 
+* Use the `song.save` method to persist them to the database.
 
-One thing to keep in mind is that, as it stands, we could call `#save` on the *same `Song` instance twice* and save essentially duplicate records into our database. Don't worry, we'll take care of this later on. 
+This approach still leaves a little to be desired, however. Here, we have to first create the new song and then save it, every time we want to create and save a song. This is repititive and tedious. As programmers (you might remember), we are lazy. If we can accomplish something with fewer lines of code we do it. **Any time we see the same code being used again and again, we think about abstracting that code into a method.**
+
+Since first creating an object and then saving a record representing that object is so common. Let's write a method that does just that. 
+
+### The `#create` Method
+
+This method will wrap the code we used above to create a new `Song` instance and save it. 
+
+```ruby
+class Song
+  ...
+
+  def self.create(name:, album:)
+    song = Song.new(name, album)
+    song.save
+  end
+end
+```
+
+Here, we use keyword arguments to pass a name and album into our `#create` method. We use that name and album to instantiate a new song. Then, we use the `#save` method to persist that song to the database. 
 
 ## Conclusion
 
@@ -278,4 +283,3 @@ The important concept to grasp here, and it's not easy, is the idea that we are 
 Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class, they are the directions for creating new spaceships. The box is like the database, it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
-
