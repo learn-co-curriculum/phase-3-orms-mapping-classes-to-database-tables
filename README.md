@@ -269,6 +269,8 @@ Here we:
 * Create two new song instances. 
 * Iterate over our collection of song instances stored in `Song.all` and use the `song.save` method to persist them to the database. 
 
+One thing to keep in mind is that, as it stands, we could call `#save` on the *same `Song` instance twice* and save essentially duplicate records into our database. Don't worry, we'll take care of this later on. 
+
 ## Conclusion
 
 The important concept to grasp here, and it's not easy, is the idea that we are *not* saving Ruby objects into our database. We are using the attributes of a given Ruby object to create a new row in our database table. 
