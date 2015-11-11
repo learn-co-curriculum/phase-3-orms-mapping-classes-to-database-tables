@@ -157,7 +157,7 @@ We can see that the operation of saving the attributes of a particular song into
 
 ### Inserting Data into a table with the `#save` Method
 
-Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database. 
+Let's build an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database:
 
 ```ruby
 class Song
@@ -276,8 +276,4 @@ The important concept to grasp here, and it's not easy, is the idea that we are 
 Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class, they are the directions for creating new spaceships. The box is like the database, it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
-
-
-
-
 
