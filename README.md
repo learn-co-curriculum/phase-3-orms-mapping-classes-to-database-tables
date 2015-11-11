@@ -126,7 +126,7 @@ class Song
       VALUES (?, ?)
     SQL
     
-    DB[:conn].execute(sql, #{self.name}, #{self.album})
+    DB[:conn].execute(sql, self.name, self.album)
     
   end
 end
@@ -198,7 +198,7 @@ class Song
       VALUES (?, ?)
     SQL
     
-    DB[:conn].execute(sql, #{self.name}, #{self.album})
+    DB[:conn].execute(sql, self.name, self.album)
     
   end
   
