@@ -2,9 +2,9 @@
 
 ## Objectives
 
-1. Understand the concept of mapping a Ruby class to a database table and an instance of a class to a table row.
-2. Learn how to write code that maps a Ruby class to a database table. 
-3. Learn how to write code that inserts data regarding an instance of a class into a database table row. 
+1. Map a Ruby class to a database table and an instance of a class to a table row.
+2. Write code that maps a Ruby class to a database table. 
+3. Write code that inserts data regarding an instance of a class into a database table row. 
 
 ## Mapping a Class to a Table
 
@@ -298,8 +298,8 @@ song.album
 
 ## Conclusion
 
-The important concept to grasp here, and it's not easy, is the idea that we are *not* saving Ruby objects into our database. We are using the attributes of a given Ruby object to create a new row in our database table. 
+The important concept to grasp here is the idea that we are *not* saving Ruby objects into our database. We are using the attributes of a given Ruby object to create a new row in our database table. 
 
-Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class, they are the directions for creating new spaceships. The box is like the database, it stores your legos.
+Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class: they are the directions for creating new spaceships. The box is like the database: it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
