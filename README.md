@@ -74,9 +74,9 @@ class Song
   end
   
   def self.create_table
-    sql =  <<- SQL 
+    sql =  <<-SQL 
       CREATE TABLE IF NOT EXISTS songs (
-        id PRIMARY KEY INTEGER, 
+        id INTEGER PRIMARY KEY, 
         name TEXT, 
         album TEXT
         )
@@ -217,7 +217,7 @@ class Song
   def self.create_table
     sql =  <<-SQL 
       CREATE TABLE IF NOT EXISTS songs (
-        id PRIMARY KEY INTEGER, 
+        id INTEGER PRIMARY KEY, 
         name TEXT, 
         album TEXT
         )
