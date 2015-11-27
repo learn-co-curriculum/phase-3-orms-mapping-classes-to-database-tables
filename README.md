@@ -52,7 +52,7 @@ DB[:conn]
 
 So, as we move through this reading, let's assume that our hypothetical program has just such a `config/environment.rb` file and that the `DB[:conn]` constant refers to our connection to the database. 
 
-Now that our hypothetical database is set up in our hypothetical program, let's move on to our `Song` class and it's equivalent database table. 
+Now that our hypothetical database is set up in our hypothetical program, let's move on to our `Song` class and its equivalent database table. 
 
 ### Creating the Table
 
