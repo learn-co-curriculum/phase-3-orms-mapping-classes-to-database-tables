@@ -103,7 +103,7 @@ Above, we created a class method, `#create_table`, that crafts a SQL statement t
 
 `<<-` + `name of language contained in our multiline statement` + `the string, on multiple lines` + `name of language`. 
 
-You don't have to use a heredoc, it's just a helpful too for crafting long strings in Ruby. Back to our regularly scheduled programming...
+You don't have to use a heredoc, it's just a helpful tool for crafting long strings in Ruby. Back to our regularly scheduled programming...
 
 Now that our songs table exists, we can learn how to save data regarding individual songs into that table. 
 
@@ -303,5 +303,3 @@ The important concept to grasp here is the idea that we are *not* saving Ruby ob
 Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class: they are the directions for creating new spaceships. The box is like the database: it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
-
-<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
