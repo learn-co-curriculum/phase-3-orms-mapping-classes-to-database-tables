@@ -91,7 +91,7 @@ Let's break down this code.
 
 #### The `id` Attribute
 
-Notice that we are initializing an individual `Song` instance with an `id` attribute that has a default value of `nil`. Why are we doing this? First of all, songs need an `id` attribute only because they will saved into the database and we know that each table row needs an `id` value which is the primary key. 
+Notice that we are initializing an individual `Song` instance with an `id` attribute that has a default value of `nil`. Why are we doing this? First of all, songs need an `id` attribute only because they will be saved into the database and we know that each table row needs an `id` value which is the primary key. 
 
 When we create a new song with the `Song.new` method, we *do not set that song's id*. A song gets an `id` only when it gets saved into the database (more on inserting songs into the database later). We therefore set the default value of the `id` argument that the `#initialize` method takes equal to `nil`, so that we can create new song instances that *do not have an `id` value. We'll leave that up to the database to handle later on. Why leave it up to the database? Remember that in the world of relational database, the `id` of a given record must be unique. If we could replicate a record's `id`, we would have a very disorganized database. Only the database itself, through the magic of SQL, can ensure that the `id` of each record is unique. 
 
@@ -303,5 +303,3 @@ The important concept to grasp here is the idea that we are *not* saving Ruby ob
 Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class: they are the directions for creating new spaceships. The box is like the database: it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
-
-<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
