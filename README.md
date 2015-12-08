@@ -103,7 +103,7 @@ Above, we created a class method, `#create_table`, that crafts a SQL statement t
 
 `<<-` + `name of language contained in our multiline statement` + `the string, on multiple lines` + `name of language`. 
 
-You don't have to use a heredoc, it's just a helpful too for crafting long strings in Ruby. Back to our regularly scheduled programming...
+You don't have to use a heredoc, it's just a helpful tool for crafting long strings in Ruby. Back to our regularly scheduled programming...
 
 Now that our songs table exists, we can learn how to save data regarding individual songs into that table. 
 
