@@ -33,7 +33,7 @@ Here we have an `attr_accessor` for `name` and `album`. In order to "map" this `
 
 ### Creating the Database
 
-Before we can create a songs table we need to create our music database. Whose responsibility is it create the database? It is not the responsibility of our `Song` class. Remember, classes are mapped to *tables inside a database*, not to the database as a whole. We may want to build other classes that we equate with other database tables later on. 
+Before we can create a songs table we need to create our music database. Whose responsibility is it to create the database? It is not the responsibility of our `Song` class. Remember, classes are mapped to *tables inside a database*, not to the database as a whole. We may want to build other classes that we equate with other database tables later on. 
 
 It is the responsibility of our program as a whole to create and establish the database. Accordingly, you'll see our Ruby programs set up such that they have a `config` directory that contains an `environment.rb` file. This file will look something like this:
 
@@ -303,3 +303,5 @@ The important concept to grasp here is the idea that we are *not* saving Ruby ob
 Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class: they are the directions for creating new spaceships. The box is like the database: it stores your legos.
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
+
+<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
