@@ -249,7 +249,7 @@ hello.save
 ninety_nine_problems.save
 ```
 
-#### Giving Our `Song` Instance and `id` 
+#### Giving Our `Song` Instance an `id` 
 
 When we `INSERT` the data concerning a particular `Song` instance into out database table, we create a new row in that table. That row would look something like this:
 
