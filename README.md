@@ -261,7 +261,7 @@ Notice that the database table's row has a column for `Name`, `Album` and also `
 
 In this way, our `hello` instance is stored in the database with the name and album that we gave it, *plus* an ID number that the database assigns to it. 
 
-We want our `hello` instance to completely reflect the database row it is associated it, so that we can retrieve it from the table later on with ease. So, once the new row with `hello`'s data is inserted into the table, let's grab the `ID` of that newly inserted row and assign it to be the value of `hello`'s `id` attribute. In order for that work, our `Song` instance must have an `attr_accessor` for `id`. Let's make those changes now:
+We want our `hello` instance to completely reflect the database row it is associated it, so that we can retrieve it from the table later on with ease. So, once the new row with `hello`'s data is inserted into the table, let's grab the `ID` of that newly inserted row and assign it to be the value of `hello`'s `id` attribute. 
 
 ```ruby
 class Song
@@ -287,9 +287,7 @@ class Song
   end
 ```
 
-Above, we created an `attr_accessor` for the `id` attribute, and told our `Song` instances to initialize with an `id` argument that defaults to `nil`. 
-
-Then, at the end of our `save` method, we se a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
+At the end of our `save` method, we se a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
 
 * Instantiating a new instance of the `Song` class
 * Inserting a new row into the database table that contains the information regarding that instance
