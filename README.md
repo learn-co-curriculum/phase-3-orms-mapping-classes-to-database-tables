@@ -254,8 +254,8 @@ ninety_nine_problems.save
 When we `INSERT` the data concerning a particular `Song` instance into out database table, we create a new row in that table. That row would look something like this:
 
 | ID | Name | Album|
---------------------
-| 1  | Hello| 25   |
+|----|------|------|
+| 1  | Hello| 25     |
 
 Notice that the database table's row has a column for `Name`, `Album` and also `ID`. Recall that we created our table to have a column for the primary key, ID, of a given record. So, as each record gets inserted into the database, it is given an ID number automatically. 
 
@@ -282,7 +282,7 @@ class Song
     
     DB[:conn].execute(sql, self.name, self.album)
 
-    self.id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     
   end
 ```
