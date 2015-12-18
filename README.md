@@ -293,6 +293,16 @@ At the end of our `save` method, we se a SQL query to grab the value of the `ID`
 * Inserting a new row into the database table that contains the information regarding that instance
 * Grabbing the `ID` of that newly inserted row and assigned the given `Song` instance's `id` attribute equal to the `ID` of its associated database table row. 
 
+Let's revisit our code that instantiated and saved some songs:
+
+```ruby
+Song.create_table
+hello = Song.new("Hello", "25")
+ninety_nine_problems = Song.new("99 Problems", "The Black Album")
+
+hello.save
+ninety_nine_problems.save
+```
 
 Here we:
 
@@ -300,7 +310,7 @@ Here we:
 * Create two new song instances. 
 * Use the `song.save` method to persist them to the database.
 
-This approach still leaves a little to be desired, however. Here, we have to first create the new song and then save it, every time we want to create and save a song. This is repititive and tedious. As programmers (you might remember), we are lazy. If we can accomplish something with fewer lines of code we do it. **Any time we see the same code being used again and again, we think about abstracting that code into a method.**
+This approach still leaves a little to be desired, however. Here, we have to first create the new song and then save it, every time we want to create and save a song. This is repetitive and tedious. As programmers (you might remember), we are lazy. If we can accomplish something with fewer lines of code we do it. **Any time we see the same code being used again and again, we think about abstracting that code into a method.**
 
 Since first creating an object and then saving a record representing that object is so common. Let's write a method that does just that. 
 
