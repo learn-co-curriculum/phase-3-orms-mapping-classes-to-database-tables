@@ -249,6 +249,51 @@ hello.save
 ninety_nine_problems.save
 ```
 
+#### Giving Our `Song` Instance an `id` 
+
+When we `INSERT` the data concerning a particular `Song` instance into out database table, we create a new row in that table. That row would look something like this:
+
+| ID | Name | Album|
+--------------------
+| 1  | Hello| 25   |
+
+Notice that the database table's row has a column for `Name`, `Album` and also `ID`. Recall that we created our table to have a column for the primary key, ID, of a given record. So, as each record gets inserted into the database, it is given an ID number automatically. 
+
+In this way, our `hello` instance is stored in the database with the name and album that we gave it, *plus* an ID number that the database assigns to it. 
+
+We want our `hello` instance to completely reflect the database row it is associated it, so that we can retrieve it from the table later on with ease. So, once the new row with `hello`'s data is inserted into the table, let's grab the `ID` of that newly inserted row and assign it to be the value of `hello`'s `id` attribute. 
+
+```ruby
+class Song
+
+  attr_accessor :name, :album, :id
+  
+  def initialize(name, album, id=nil)
+    @id = id
+    @name = name
+    @album = album
+  end
+
+  def save
+    sql = <<- SQL
+      INSERT INTO songs (name, album) 
+      VALUES (?, ?)
+    SQL
+    
+    DB[:conn].execute(sql, self.name, self.album)
+
+    self.id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+    
+  end
+```
+
+At the end of our `save` method, we se a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
+
+* Instantiating a new instance of the `Song` class
+* Inserting a new row into the database table that contains the information regarding that instance
+* Grabbing the `ID` of that newly inserted row and assigned the given `Song` instance's `id` attribute equal to the `ID` of its associated database table row. 
+
+
 Here we:
 
 * Create the songs table. 
