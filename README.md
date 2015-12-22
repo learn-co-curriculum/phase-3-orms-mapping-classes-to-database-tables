@@ -287,7 +287,7 @@ class Song
   end
 ```
 
-At the end of our `save` method, we se a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
+At the end of our `save` method, we use a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
 
 * Instantiating a new instance of the `Song` class
 * Inserting a new row into the database table that contains the information regarding that instance
