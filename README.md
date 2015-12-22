@@ -332,13 +332,13 @@ end
 
 Here, we use keyword arguments to pass a name and album into our `#create` method. We use that name and album to instantiate a new song. Then, we use the `#save` method to persist that song to the database. 
 
-Notice that at the end of the method, we are returning the `song` instance that we instantiated. The return value of `#create` should alwasy be the object that we created. Why? Imagine you are working with your program and you create a new song:
+Notice that at the end of the method, we are returning the `song` instance that we instantiated. The return value of `#create` should always be the object that we created. Why? Imagine you are working with your program and you create a new song:
 
 ```ruby
 Song.create(name: "Hello", album: "25")
 ```
 
-Now, we would have to run a separate query on our database to grab the record that we just created. That is way to much work for us. It would be much easier for our `#create` method to simply return the new object for us to work with:
+Now, we would have to run a separate query on our database to grab the record that we just created. That is way too much work for us. It would be much easier for our `#create` method to simply return the new object for us to work with:
 
 ```ruby
 song = Song.create(name: "Hello", album: "25")
