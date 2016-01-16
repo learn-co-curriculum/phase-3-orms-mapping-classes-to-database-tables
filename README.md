@@ -95,9 +95,9 @@ Notice that we are initializing an individual `Song` instance with an `id` attri
 
 When we create a new song with the `Song.new` method, we *do not set that song's id*. A song gets an `id` only when it gets saved into the database (more on inserting songs into the database later). We therefore set the default value of the `id` argument that the `#initialize` method takes equal to `nil`, so that we can create new song instances that *do not have an `id` value. We'll leave that up to the database to handle later on. Why leave it up to the database? Remember that in the world of relational database, the `id` of a given record must be unique. If we could replicate a record's `id`, we would have a very disorganized database. Only the database itself, through the magic of SQL, can ensure that the `id` of each record is unique. 
 
-#### The `#create_table` Method
+#### The `.create_table` Method
 
-Above, we created a class method, `#create_table`, that crafts a SQL statement to create a songs table and give that table column names that match the attributes of an individual instance of `Song`. Why is the `#create_table` method a class method? Well, it is *not* the responsibility of an individual song to create the table it will eventually be saved into. It is the job of the class as a whole to create the table that it is mapped to. 
+Above, we created a class method, `.create_table`, that crafts a SQL statement to create a songs table and give that table column names that match the attributes of an individual instance of `Song`. Why is the `.create_table` method a class method? Well, it is *not* the responsibility of an individual song to create the table it will eventually be saved into. It is the job of the class as a whole to create the table that it is mapped to. 
 
 **Top-Tip:** For strings that will take up multiple lines in your text editor, use a [heredoc](https://en.wikipedia.org/wiki/Here_document) to create a string that runs on to multiple lines. To create a heredoc, we use:
 
@@ -282,7 +282,7 @@ class Song
     
     DB[:conn].execute(sql, self.name, self.album)
 
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     
   end
 ```
