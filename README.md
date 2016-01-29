@@ -359,4 +359,4 @@ Think of it like a game of legos. You have a brand new lego box set to create a 
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
 
-<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables' title='ORM: Mapping Ruby Classes to Database Tables'>ORM: Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
