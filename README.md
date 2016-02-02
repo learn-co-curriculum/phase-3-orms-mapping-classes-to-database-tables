@@ -50,7 +50,7 @@ Here we set up a constant, `DB`, that is equal to a hash that contains our conne
 DB[:conn]
 ```
 
-So, as we move through this reading, let's assume that our hypothetical program has just such a `config/environment.rb` file and that the `DB[:conn]` constant refers to our connection to the database. 
+So, as we move through this reading, let's assume that our hypothetical program has a `config/environment.rb` file and that the `DB[:conn]` constant refers to our connection to the database. 
 
 Now that our hypothetical database is set up in our hypothetical program, let's move on to our `Song` class and its equivalent database table. 
 
@@ -359,4 +359,6 @@ Think of it like a game of legos. You have a brand new lego box set to create a 
 
 You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables' title='ORM: Mapping Ruby Classes to Database Tables'>ORM: Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
+<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
