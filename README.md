@@ -355,9 +355,9 @@ song.album
 
 The important concept to grasp here is the idea that we are *not* saving Ruby objects into our database. We are using the attributes of a given Ruby object to create a new row in our database table. 
 
-Think of it like a game of legos. You have a brand new lego box set to create a lego spaceship. The box comes with legos and instructions. The instructions are like the class: they are the directions for creating new spaceships. The box is like the database: it stores your legos.
+Think of it like making butter cookies. You have a cookie cutter, which in our case would be our class. It describes what a cookie should look like. Then you use it to cut out a cookie, or instantiate a class object. But that's not enough, you have to show it to your friends. So you take a picture of it and post to your Bookface account and share it with everybody else, like how your database can share information with other parts of your program.
 
-You follow the instructions and create a new spaceship object out of individual legos. Then, your parents tell you it is time for bed and you need to put away your legos. You dismantle your spaceship back into its constituent parts and store them in the box––your database. The box doesn't fit the *entire assembled spaceship*, you have to break it down into the pieces out of which you made it and store those instead. 
+The picture doesn't do anything to the cookie itself, but merely captures certain aspects of it. It's a butter cookie, it looks fresh and delicious, and it has little sprinkles on it. Those aspects are captured in the picture, but the cookie and the picture are still two different things. After you eat the cookie, or in our case after you delete the Ruby object, the database will not change at all until the record is deleted, and vice versa.
 
 <a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
 
