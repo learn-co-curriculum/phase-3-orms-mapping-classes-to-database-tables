@@ -261,7 +261,7 @@ Notice that the database table's row has a column for `Name`, `Album` and also `
 
 In this way, our `hello` instance is stored in the database with the name and album that we gave it, *plus* an ID number that the database assigns to it. 
 
-We want our `hello` instance to completely reflect the database row it is associated it, so that we can retrieve it from the table later on with ease. So, once the new row with `hello`'s data is inserted into the table, let's grab the `ID` of that newly inserted row and assign it to be the value of `hello`'s `id` attribute. 
+We want our `hello` instance to completely reflect the database row it is associated with so that we can retrieve it from the table later on with ease. So, once the new row with `hello`'s data is inserted into the table, let's grab the `ID` of that newly inserted row and assign it to be the value of `hello`'s `id` attribute. 
 
 ```ruby
 class Song
@@ -312,7 +312,7 @@ Here we:
 
 This approach still leaves a little to be desired, however. Here, we have to first create the new song and then save it, every time we want to create and save a song. This is repetitive and tedious. As programmers (you might remember), we are lazy. If we can accomplish something with fewer lines of code we do it. **Any time we see the same code being used again and again, we think about abstracting that code into a method.**
 
-Since first creating an object and then saving a record representing that object is so common. Let's write a method that does just that. 
+Since first creating an object and then saving a record representing that object is so common, let's write a method that does just that.
 
 ### The `#create` Method
 
