@@ -159,7 +159,7 @@ Let's built an instance method, `#save`, that saves a given instance of our `Son
 class Song
 
   def save
-    sql = <<- SQL
+    sql = <<-SQL
       INSERT INTO songs (name, album) 
       VALUES (?, ?)
     SQL
