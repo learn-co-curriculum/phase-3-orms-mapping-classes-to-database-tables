@@ -153,7 +153,7 @@ We can see that the operation of saving the attributes of a particular song into
 
 ### Inserting Data into a table with the `#save` Method
 
-Let's built an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database. 
+Let's build an instance method, `#save`, that saves a given instance of our `Song` class into the songs table of our database. 
 
 ```ruby
 class Song
