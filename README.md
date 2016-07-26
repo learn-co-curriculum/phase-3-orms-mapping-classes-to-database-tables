@@ -111,7 +111,7 @@ Now that our songs table exists, we can learn how to save data regarding individ
 
 When we say that we are saving data to our database, what data are we referring to? If individual instances of a class are "mapped" to rows in  a table, does that mean that the instances themselves, these individual Ruby objects, are saved into the database?
 
-Actually, **we are not saving Ruby objects in our database.** We are going to take the individual attributes of a given instance, in this case a song's name and album, and save *those attributes that describe an individual song* to the database, as one, single row.
+Actually, **we are not saving Ruby objects in our database.** We are going to take the individual attributes of a given instance, in this case a song's name and album, and save *those attributes that describe an individual song* to the database as one, single row.
 
 For example, let's say we have a song:
 
@@ -125,7 +125,7 @@ gold_digger.album
 # => "Late Registration" 
 ```
 
-This song has it's two attributes, `name` and `album`, set equal to the above values. In order to save the song `gold_digger` into the songs table, we will use the name and album of the song to create a new row in that table. The SQL statement we want to execute would look something like this:
+This song has its two attributes, `name` and `album`, set equal to the above values. In order to save the song `gold_digger` into the songs table, we will use the name and album of the song to create a new row in that table. The SQL statement we want to execute would look something like this:
 
 ```ruby
 INSERT INTO songs (name, album) VALUES ("Gold Digger", "Late Registration")
@@ -149,7 +149,7 @@ In order to save `hello` into our database, we do not insert the Ruby object sto
 INSERT INTO songs (name, album) VALUES ("Hello", "25")
 ```
 
-We can see that the operation of saving the attributes of a particular song into a database table is common enough. Every time we want to save a record, though, we are repeating the same exact steps and using the same code. The only thing that is different are the values that we are inserting into our songs table. Let's abstract this functionality into an instance method, `#save`. 
+We can see that the operation of saving the attributes of a particular song into a database table is common enough. Every time we want to save a record, though, we are repeating the same exact steps and using the same code. The only things that are different are the values that we are inserting into our songs table. Let's abstract this functionality into an instance method, `#save`. 
 
 ### Inserting Data into a table with the `#save` Method
 
@@ -197,7 +197,7 @@ So, our `#save` method inserts a record into our database that has the name and 
 
 ## Creating Instances vs. Creating Table Rows
 
-The moment in which we create a new `Song` instance with the `#new` method is *different than the moment in which we save a representation of that song to our database*. The `#new` method creates a new instance of the song class, a new Ruby object. The `#save` method takes the attributes that characterize a given song and save it to the songs table in our database as its own table row. 
+The moment in which we create a new `Song` instance with the `#new` method is *different than the moment in which we save a representation of that song to our database*. The `#new` method creates a new instance of the song class, a new Ruby object. The `#save` method takes the attributes that characterize a given song and saves them in a new row of the songs table in our database.
 
 At what point in time should we actually save a new record? While it is possible to save the record right at the moment the new object is created, i.e. in the `#initialize` method, this is not a great idea. We don't want to force our objects to be saved every time they are created, or make the creation of an object dependent upon/always coupled with saving a record to the database. As our program grows and changes, we may find the need to create objects and not save them. A dependency between instantiating an object and saving that record to the database would preclude this or, at the very least, make it harder to implement. 
 
@@ -289,9 +289,9 @@ class Song
 
 At the end of our `save` method, we use a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
 
-* Instantiating a new instance of the `Song` class
-* Inserting a new row into the database table that contains the information regarding that instance
-* Grabbing the `ID` of that newly inserted row and assigned the given `Song` instance's `id` attribute equal to the `ID` of its associated database table row. 
+* Instantiating a new instance of the `Song` class.
+* Inserting a new row into the database table that contains the information regarding that instance.
+* Grabbing the `ID` of that newly inserted row and assigning the given `Song` instance's `id` attribute equal to the `ID` of its associated database table row.
 
 Let's revisit our code that instantiated and saved some songs:
 
@@ -357,8 +357,6 @@ The important concept to grasp here is the idea that we are *not* saving Ruby ob
 
 Think of it like making butter cookies. You have a cookie cutter, which in our case would be our class. It describes what a cookie should look like. Then you use it to cut out a cookie, or instantiate a class object. But that's not enough, you have to show it to your friends. So you take a picture of it and post to your Bookface account and share it with everybody else, like how your database can share information with other parts of your program.
 
-The picture doesn't do anything to the cookie itself, but merely captures certain aspects of it. It's a butter cookie, it looks fresh and delicious, and it has little sprinkles on it. Those aspects are captured in the picture, but the cookie and the picture are still two different things. After you eat the cookie, or in our case after you delete the Ruby object, the database will not change at all until the record is deleted, and vice versa.
-
-<a href='https://learn.co/lessons/orm-mapping-to-tables' data-visibility='hidden'>View this lesson on Learn.co</a>
+The picture doesn't do anything to the cookie itself, but merely captures certain aspects of it. It's a butter cookie, it looks fresh and delicious, and it has little sprinkles on it. Those aspects are captured in the picture, but the cookie and the picture are still two different things. Ceci n'est pas une butter cookie! After you eat the cookie, or in our case after you delete the Ruby object, the database will not change at all until the record is deleted, and vice versa.
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
