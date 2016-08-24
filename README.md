@@ -285,6 +285,7 @@ class Song
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
     
   end
+end
 ```
 
 At the end of our `save` method, we use a SQL query to grab the value of the `ID` column of the last inserted row, and set that equal to the given song instance's `id` attribute. Don't worry too much about how that SQL query works for now, we'll learn more about it later. The important thing to understand is the process of:
@@ -360,3 +361,5 @@ Think of it like making butter cookies. You have a cookie cutter, which in our c
 The picture doesn't do anything to the cookie itself, but merely captures certain aspects of it. It's a butter cookie, it looks fresh and delicious, and it has little sprinkles on it. Those aspects are captured in the picture, but the cookie and the picture are still two different things. Ceci n'est pas une butter cookie! After you eat the cookie, or in our case after you delete the Ruby object, the database will not change at all until the record is deleted, and vice versa.
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
