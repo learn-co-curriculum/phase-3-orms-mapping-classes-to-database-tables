@@ -99,11 +99,11 @@ When we create a new song with the `Song.new` method, we *do not set that song's
 
 Above, we created a class method, `.create_table`, that crafts a SQL statement to create a songs table and give that table column names that match the attributes of an individual instance of `Song`. Why is the `.create_table` method a class method? Well, it is *not* the responsibility of an individual song to create the table it will eventually be saved into. It is the job of the class as a whole to create the table that it is mapped to. 
 
-**Top-Tip:** For strings that will take up multiple lines in your text editor, use a [heredoc](https://en.wikipedia.org/wiki/Here_document) to create a string that runs on to multiple lines. To create a heredoc, we use:
-
-`<<-` + `name of language contained in our multiline statement` + `the string, on multiple lines` + `name of language`. 
-
-You don't have to use a heredoc, it's just a helpful tool for crafting long strings in Ruby. Back to our regularly scheduled programming...
+> **Top-Tip:** For strings that will take up multiple lines in your text editor, use a [heredoc](https://en.wikipedia.org/wiki/Here_document) to create a string that runs on to multiple lines.
+>
+> `<<-` + `special word meaning "End of Document"` + `the string, on multiple lines` + `special word meaning "End of Document"`.
+>
+> You don't have to use a heredoc, it's just a helpful tool for crafting long strings in Ruby. Back to our regularly scheduled programming...
 
 Now that our songs table exists, we can learn how to save data regarding individual songs into that table. 
 
@@ -275,7 +275,7 @@ class Song
   end
 
   def save
-    sql = <<- SQL
+    sql = <<-SQL
       INSERT INTO songs (name, album) 
       VALUES (?, ?)
     SQL
