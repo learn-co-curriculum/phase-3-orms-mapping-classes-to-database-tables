@@ -178,7 +178,7 @@ In order to `INSERT` data into our songs table, we need to craft a SQL `INSERT` 
 
 ```sql
 INSERT INTO songs (name, album)
-VALUES <the given song's name>, <the given song's album>
+VALUES songs_name, songs_album
 ```
 
 Above, we used the heredoc to craft our multi-line SQL statement. How are we going to pass in, or interpolate, the name and album of a given song into our heredoc? 
