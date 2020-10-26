@@ -360,6 +360,6 @@ Think of it like making butter cookies. You have a cookie cutter, which in our c
 
 The picture doesn't do anything to the cookie itself, but merely captures certain aspects of it. It's a butter cookie, it looks fresh and delicious, and it has little sprinkles on it. Those aspects are captured in the picture, but the cookie and the picture are still two different things. Ceci n'est pas une butter cookie! After you eat the cookie, or in our case after you delete the Ruby object, the database will not change at all until the record is deleted, and vice versa.
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
 
-<p class='util--hide'>View <a href='https://learn.co/lessons/orm-mapping-to-tables'>Mapping Ruby Classes to Database Tables</a> on Learn.co and start learning to code for free.</p>
+
+
