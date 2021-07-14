@@ -59,7 +59,9 @@ database. Accordingly, you'll see our Ruby programs set up such that they have a
 the file looks like this:
 
 ```ruby
-require 'sqlite3'
+require 'bundler'
+Bundler.require
+
 require_relative '../lib/song'
 
 DB = { conn: SQLite3::Database.new("db/music.db") }
@@ -264,6 +266,8 @@ Let's build an instance method, `#save`, that saves a given instance of our
 ```ruby
 class Song
 
+  # ... rest of song methods
+
   def save
     sql = <<-SQL
       INSERT INTO songs (name, album)
@@ -442,6 +446,8 @@ class Song
     @album = album
   end
 
+  # ... rest of song methods
+
   def save
     sql = <<-SQL
       INSERT INTO songs (name, album)
@@ -509,7 +515,7 @@ This method will wrap the code we used above to create a new `Song` instance and
 
 ```ruby
 class Song
-  # ...
+  # ... rest of song methods
 
   def self.create(name:, album:)
     song = Song.new(name, album)
