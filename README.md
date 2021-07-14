@@ -552,6 +552,8 @@ song.album
 # => "25"
 ```
 
+Excellent! Run `learn test` now to pass the tests and submit the assignment.
+
 ## Conclusion
 
 The important concept to grasp here is the idea that we are _not_ saving Ruby
