@@ -31,7 +31,7 @@ class Song
 
   attr_accessor :name, :album
 
-  def initialize(name, album)
+  def initialize(name:, album:)
     @name = name
     @album = album
   end
@@ -96,8 +96,8 @@ class Song
 
   attr_accessor :name, :album, :id
 
-  def initialize(name, album)
-    @id = nil
+  def initialize(name:, album:, id: nil)
+    @id = id
     @name = name
     @album = album
   end
@@ -121,17 +121,17 @@ Let's break down this code.
 #### The `id` Attribute
 
 Notice that we are initializing an individual `Song` instance with an `id`
-attribute that has a value of `nil`. Why are we doing this? First of
+attribute that has a default value of `nil`. Why are we doing this? First of
 all, songs need an `id` attribute only because they will be saved into the
 database and we know that each table row needs an `id` value which is the
 primary key.
 
 When we create a new song with the `Song.new` method, we _do not set that song's
 id_. A song gets an `id` only when it gets saved into the database (more on
-inserting songs into the database later). We therefore set the value of
-the `@id` instance variable in the `#initialize` method equal to `nil`, so that we
-can create new song instances that do not have an `id` value. We'll leave that
-up to the database to handle later on.
+inserting songs into the database later). We therefore set the default value of
+the `id` argument for the `#initialize` equal to `nil`, so that we can create new
+song instances that do not have an `id` value. We'll leave that up to the
+database to handle later on.
 
 Why leave it up to the database? Remember that in the world of relational
 database, the `id` of a given record must be unique. If we could replicate a
@@ -212,7 +212,7 @@ database as one, single row.
 For example, let's say we have a song:
 
 ```ruby
-gold_digger = Song.new("Gold Digger", "Late Registration")
+gold_digger = Song.new(name: "Gold Digger", album: "Late Registration")
 
 gold_digger.name
 # => "Gold Digger"
@@ -234,7 +234,7 @@ VALUES ("Gold Digger", "Late Registration");
 What if we had another song that we wanted to save?
 
 ```ruby
-hello = Song.new("Hello", "25")
+hello = Song.new(name: "Hello", album: "25")
 
 hello.name
 # => "Hello"
@@ -344,8 +344,8 @@ class Song
 
   attr_accessor :name, :album, :id
 
-  def initialize(name, album)
-    @id = nil
+  def initialize(name:, album:, id: nil)
+    @id = id
     @name = name
     @album = album
   end
@@ -379,11 +379,11 @@ Now, we can create and save songs like this. Try this out by running
 of Pry in order to reload the code if you left it open earlier):
 
 ```ruby
-hello = Song.new("Hello", "25")
+hello = Song.new(name: "Hello", album: "25")
 # => #<Song:0x00007fed21935128 @album="25", @id=nil, @name="Hello">
 hello.save
 # => []
-ninety_nine_problems = Song.new("99 Problems", "The Black Album")
+ninety_nine_problems = Song.new(name: "99 Problems", album: "The Black Album")
 # => #<Song:0x00007fed218c6200 @album="The Black Album", @id=nil, @name="99 Problems">
 ninety_nine_problems.save
 # => []
@@ -440,8 +440,8 @@ class Song
 
   attr_accessor :name, :album, :id
 
-  def initialize(name, album)
-    @id = nil
+  def initialize(name:, album:, id: nil)
+    @id = id
     @name = name
     @album = album
   end
@@ -483,11 +483,11 @@ Let's revisit our code that instantiated and saved some songs by running
 `ruby bin/run` again and entering this in Pry:
 
 ```ruby
-hello = Song.new("Hello", "25")
+hello = Song.new(name: "Hello", album: "25")
 # => #<Song:0x00007fed21935128 @album="25", @id=nil, @name="Hello">
 hello.save
 # => #<Song:0x00007fb61d202a58 @album="25", @id=3, @name="Hello">
-ninety_nine_problems = Song.new("99 Problems", "The Black Album")
+ninety_nine_problems = Song.new(name: "99 Problems", album: "The Black Album")
 # => #<Song:0x00007fed218c6200 @album="The Black Album", @id=nil, @name="99 Problems">
 ninety_nine_problems.save
 # => #<Song:0x00007fb61d14c820 @album="The Black Album", @id=4, @name="99 Problems">
@@ -497,7 +497,7 @@ Here we:
 
 - Create the songs table.
 - Create two new song instances.
-- Use the `song.save` method to persist them to the database.
+- Use the `Song#save` method to persist them to the database.
 
 This approach still leaves a little to be desired, however. Here, we have to
 first create the new song and then save it, every time we want to create and
@@ -518,7 +518,7 @@ class Song
   # ... rest of song methods
 
   def self.create(name:, album:)
-    song = Song.new(name, album)
+    song = Song.new(name: name, album: album)
     song.save
   end
 end

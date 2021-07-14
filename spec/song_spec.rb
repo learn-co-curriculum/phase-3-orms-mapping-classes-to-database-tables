@@ -1,15 +1,15 @@
 require "spec_helper"
 
 describe Song do
-  let(:hello) { Song.new("Hello", "25") }
-  let(:ninety_nine_problems) { Song.new("99 Problems", "The Black Album") }
+  let(:hello) { Song.new(name: "Hello", album: "25") }
+  let(:ninety_nine_problems) { Song.new(name: "99 Problems", album: "The Black Album") }
 
   before do
     DB[:conn].execute("DROP TABLE IF EXISTS songs;")
   end
 
   context "when initialized with a name and a albun" do
-    let(:gold_digger) { Song.new("Gold Digger", "Late Registration") }
+    let(:gold_digger) { Song.new(name: "Gold Digger", album: "Late Registration") }
 
     it 'the name attribute can be accessed' do
       expect(gold_digger.name).to eq("Gold Digger")
