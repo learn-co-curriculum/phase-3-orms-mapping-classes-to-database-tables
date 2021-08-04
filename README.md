@@ -404,22 +404,9 @@ When we `INSERT` the data concerning a particular `Song` instance into our
 database table, we create a new row in that table. That row would look something
 like this:
 
-<table border="1" cellpadding="4" cellspacing="0">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>album</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Hello</td>
-      <td>25</td>
-    </tr>
-  </tbody>
-</table>
+| id | name | album |
+| --- | --- | --- |
+| 1 | Hello | 25 |
 
 Notice that the database table's row has a column for `name`, `album` and also
 `id`. Recall that we created our table to have a column for the primary key, ID,
