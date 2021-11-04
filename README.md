@@ -375,7 +375,7 @@ end
 ```
 
 Now, we can create and save songs like this. Try this out by running
-`ruby bin/pry` and running this code in the Pry session (make sure to exit out
+`ruby bin/run` and running this code in the Pry session (make sure to exit out
 of Pry in order to reload the code if you left it open earlier):
 
 ```ruby
