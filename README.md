@@ -194,7 +194,7 @@ DB[:conn].execute("PRAGMA table_info(songs)")
 ```
 
 The output isn't easy to read, but you'll see the different column names (`id`,
-`name`, `album`) along with their data types (`INTEGER`, `INTEGER`, `TEXT`).
+`name`, `album`) along with their data types (`INTEGER`, `TEXT`, `TEXT`).
 Success!
 
 ## Mapping Class Instances to Table Rows
