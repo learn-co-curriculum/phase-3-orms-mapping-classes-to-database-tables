@@ -22,6 +22,9 @@ table.
 Let's say we are building a music player app that allows users to store their
 music and browse their songs by song.
 
+**NOTE: Remember to run `bundle install` to install the
+dependencies before running your code`**
+
 This program will have a `Song` class. Each song instance will have a name and
 an album attribute. The starter code for this class is in the `lib/song.rb`
 file:
