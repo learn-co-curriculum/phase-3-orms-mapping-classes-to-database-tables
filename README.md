@@ -23,7 +23,7 @@ Let's say we are building a music player app that allows users to store their
 music and browse their songs by song.
 
 **NOTE: Remember to run `bundle install` to install the
-dependencies before running your code`**
+dependencies before running your code**
 
 This program will have a `Song` class. Each song instance will have a name and
 an album attribute. The starter code for this class is in the `lib/song.rb`
@@ -392,7 +392,7 @@ ninety_nine_problems.save
 # => []
 ```
 
-That last line of the `#save` method return an empty array once more since
+That last line of the `#save` method returns an empty array once more since
 `INSERT`ing new rows in a database doesn't return any data, but you can check if
 all the records were indeed saved by running this in your Pry session:
 
