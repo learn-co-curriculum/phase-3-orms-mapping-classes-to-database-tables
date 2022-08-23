@@ -8,7 +8,7 @@ describe Song do
     DB[:conn].execute("DROP TABLE IF EXISTS songs;")
   end
 
-  context "when initialized with a name and a albun" do
+  context "when initialized with a name and an album" do
     let(:gold_digger) { Song.new(name: "Gold Digger", album: "Late Registration") }
 
     it 'the name attribute can be accessed' do
