@@ -88,7 +88,7 @@ database table, we need to create a songs table. We will accomplish this by
 writing a class method in our `Song` class that creates this table.
 
 **To "map" our class to a database table, we will create a table with the same
-name as our class and give that table column names that match the
+name, pluralized, as our class, and give that table column names that match the
 `attr_accessor`s of our class.**
 
 Update the `Song` class as follows so that it maps instance attributes to table
