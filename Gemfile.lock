@@ -20,15 +20,17 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
-    sqlite3 (1.4.2)
+    sqlite3 (2.0.2-arm64-darwin)
+    sqlite3 (2.0.2-x86_64-darwin)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-darwin-19
 
 DEPENDENCIES
   pry (~> 0.14.1)
   rspec (~> 3.10)
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 2.0.2)
 
 BUNDLED WITH
    2.2.23
